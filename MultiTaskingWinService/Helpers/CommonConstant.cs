@@ -21,6 +21,8 @@
         public static readonly string BlockHistoryNse = "https://www1.nseindia.com/" + "content/historical/EQUITIES/year/month/cmstrdatebhav.csv.zip";
         public static readonly string ZipPath = @"D:\Upwork\StockiHstory\";
 
+        public static readonly string TickertapeURL = "https://api.tickertape.in"+ "/search?text=cname&types=stock";
+
         //public static readonly string DBConnectionString = @"Data Source=DESKTOP-TFRDGC0\SQLExpress;Initial Catalog=StockMonitor;Integrated Security=True";
 
         //public static readonly string BulkDealQuery = "INSERT INTO [dbo].[BlockBulkDeals] " +
