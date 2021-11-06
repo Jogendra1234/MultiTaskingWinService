@@ -282,6 +282,7 @@ namespace C9ISM.Scheduler.Helpers
                                     {
                                         TPSid = stock.sid,
                                         TPurl = stock.slug,
+                                        TPName  = stock.name,
                                         company.Code,
                                         company.ID
                                     };
