@@ -9,6 +9,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace C9ISM.Scheduler.Helpers
 {
@@ -85,7 +86,8 @@ namespace C9ISM.Scheduler.Helpers
                         Root2 VolDeserializedClass = JsonConvert.DeserializeObject<Root2>(volDeliveryJSON);
 
                         decimal sma5 = 0, sma10 = 0, sma20 = 0, sma50 = 0, sma100 = 0, sma200 = 0, ema5 = 0, ema10 = 0, ema50 = 0, ema100 = 0, ema200 = 0,
-                            s1 = 0, s2 = 0, s3 = 0,r1 = 0, r2 = 0, r3 = 0, deliveryAverageMonth = 0, deliveryAverageWeek = 0, deliveryYesterday = 0;
+                            s1 = 0, s2 = 0, s3 = 0, r1 = 0, r2 = 0, r3 = 0;
+                        string deliveryAverageMonth = "", deliveryAverageWeek = "", deliveryYesterday = "";
 
                         foreach (var item in myDeserializedClass.data.sma)
                         {
@@ -130,9 +132,13 @@ namespace C9ISM.Scheduler.Helpers
                             }
                         }
 
-                        deliveryYesterday = VolDeserializedClass.data.stock_price_volume_data.volume.Yesterday.delivery;
-                        deliveryAverageWeek = Convert.ToDecimal(VolDeserializedClass.data.stock_price_volume_data.volume._1WeekAvg.delivery);
-                        deliveryAverageMonth = Convert.ToDecimal(VolDeserializedClass.data.stock_price_volume_data.volume._1MonthAvg.delivery);
+                        deliveryYesterday = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume.Yesterday.delivery_display_text);
+                        deliveryAverageWeek = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume._1WeekAvg.delivery_display_text);
+                        deliveryAverageMonth = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume._1MonthAvg.delivery_display_text);
+
+                        deliveryYesterday = deliveryYesterday != "" ? Regex.Replace(deliveryYesterday, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
+                        deliveryAverageWeek = deliveryAverageWeek != "" ? Regex.Replace(deliveryAverageWeek, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
+                        deliveryAverageMonth = deliveryAverageMonth != "" ? Regex.Replace(deliveryAverageMonth, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
 
                         var sqlParameters = new
                         {
@@ -159,7 +165,7 @@ namespace C9ISM.Scheduler.Helpers
                             DeliveryYesterday = deliveryYesterday
 
                         };
-                        await dbHandlerObj.SaveData(CommandType.StoredProcedure, sqlParameters, "UpdatePortFolioOtherColums");
+                        await dbHandlerObj.SaveData(CommandType.StoredProcedure, sqlParameters, "sp_UpdatePortFolioOtherColums");
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("Stock Other parameter updated to database : {0}", row.Code);
                         successCount++;
