@@ -21,7 +21,10 @@
         public static readonly string BlockHistoryNse = "https://www1.nseindia.com/" + "content/historical/EQUITIES/year/month/cmstrdatebhav.csv.zip";
         public static readonly string ZipPath = @"D:\Upwork\StockiHstory\";
 
-        public static readonly string TickertapeURL = "https://api.tickertape.in"+ "/search?text=cname&types=stock";
+        public static readonly string BaseTickerTape = "https://api.tickertape.in";
+        public static readonly string TickertapeURL = BaseTickerTape + "/search?text=cname&types=stock";
+
+        public static readonly string NewsUrl = BaseTickerTape + "/stocks/feed/cname?types=news-video,news-article,opinion-article";
 
         //public static readonly string DBConnectionString = @"Data Source=DESKTOP-TFRDGC0\SQLExpress;Initial Catalog=StockMonitor;Integrated Security=True";
 
