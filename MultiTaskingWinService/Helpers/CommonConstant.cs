@@ -26,6 +26,8 @@
 
         public static readonly string NewsUrl = BaseTickerTape + "/stocks/feed/cname?types=news-video,news-article,opinion-article";
 
+        public static readonly string CryptoAPI = "https://api.coingecko.com" + "/api/v3/coins/markets?vs_currency=inr&order=market_cap_desc&per_page=200&page=1&sparkline=false&price_change_percentage=1h%2C%2024h%2C%207d%2C%2014d%2C%2030d%2C%20200d";
+
         //public static readonly string DBConnectionString = @"Data Source=DESKTOP-TFRDGC0\SQLExpress;Initial Catalog=StockMonitor;Integrated Security=True";
 
         //public static readonly string BulkDealQuery = "INSERT INTO [dbo].[BlockBulkDeals] " +

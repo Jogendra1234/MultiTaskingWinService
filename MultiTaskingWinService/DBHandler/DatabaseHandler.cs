@@ -30,7 +30,7 @@ namespace DatabaseHandlerLibrary
                 try
                 {
                     sqlConnection.Open();                    
-                    return (await sqlConnection.QueryAsync<T>(dbObject, sqlParameters, commandType: commandType)).FirstOrDefault();                    
+                    return (await sqlConnection.QueryAsync<T>(dbObject, sqlParameters , commandTimeout : 5000, commandType: commandType)).FirstOrDefault();                    
                 }
                 catch(Exception ex)
                 {

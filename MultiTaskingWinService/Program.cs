@@ -28,7 +28,8 @@ namespace MultiTaskingWinService
                     // services.AddHostedService<UpdateScreenUrlJob>();
                     // services.AddHostedService<StockHistoricalDataJob>();
                     // services.AddHostedService<EmailService>();
-                    services.AddHostedService<TickerTapJob>();
+                    // services.AddHostedService<TickerTapJob>();
+                    services.AddHostedService<CryptoService>();
                 });
 
             if (isService)
