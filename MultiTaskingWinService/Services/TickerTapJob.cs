@@ -26,10 +26,10 @@ namespace MultiTaskingWinService.Services
             await UpdateTickerTap(new NewsHelper());
         }
 
-        private async Task UpdateTickerTap(NewsHelper _bulkDealServices)
+        private async Task UpdateTickerTap(NewsHelper _newsServices)
         { 
-            await _bulkDealServices.SaveNews();
-           // await _bulkDealServices.UpdateTickerTapdetail();
+            await _newsServices.SaveNews();
+            await _newsServices.UpdateTickerTapdetail();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

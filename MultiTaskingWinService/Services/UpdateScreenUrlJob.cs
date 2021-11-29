@@ -29,7 +29,7 @@ namespace MultiTaskingWinService.Services
         private async Task UpdateScreenerUrl(BulkDealHelper _bulkDealServices)
         { 
             await _bulkDealServices.UpdateURL();
-            await _bulkDealServices.UpdateTickerTapdetail();
+            //await _bulkDealServices.UpdateTickerTapdetail();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

@@ -89,56 +89,69 @@ namespace C9ISM.Scheduler.Helpers
                             s1 = 0, s2 = 0, s3 = 0, r1 = 0, r2 = 0, r3 = 0;
                         string deliveryAverageMonth = "", deliveryAverageWeek = "", deliveryYesterday = "";
 
-                        foreach (var item in myDeserializedClass.data.sma)
+                        if(myDeserializedClass.data.sma != null)
                         {
-                            if (Convert.ToInt32(item.key) == 5)
-                                sma5 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 10)
-                                sma10 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 20)
-                                sma20 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 50)
-                                sma50 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 100)
-                                sma100 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 200)
-                                sma200 = Convert.ToDecimal(item.value);
-                        }
-
-                        foreach (var item in myDeserializedClass.data.ema)
-                        {
-                            if (Convert.ToInt32(item.key) == 5)
-                                ema5 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 10)
-                                ema10 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 50)
-                                ema50 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 100)
-                                ema100 = Convert.ToDecimal(item.value);
-                            if (Convert.ToInt32(item.key) == 200)
-                                ema200 = Convert.ToDecimal(item.value);
-                        }
-
-                        foreach (var item in myDeserializedClass.data.pivotLevels)
-                        {
-                            if (Convert.ToString(item.key).ToLower() == "classic")
+                            foreach (var item in myDeserializedClass.data.sma)
                             {
-                                r1 = Convert.ToDecimal(item.pivotLevel.r1);
-                                r2 = Convert.ToDecimal(item.pivotLevel.r2);
-                                r3 = Convert.ToDecimal(item.pivotLevel.r3);
-                                s1 = Convert.ToDecimal(item.pivotLevel.s1);
-                                s2 = Convert.ToDecimal(item.pivotLevel.s2);
-                                s3 = Convert.ToDecimal(item.pivotLevel.s3);
+                                if (Convert.ToInt32(item.key) == 5)
+                                    sma5 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 10)
+                                    sma10 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 20)
+                                    sma20 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 50)
+                                    sma50 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 100)
+                                    sma100 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 200)
+                                    sma200 = Convert.ToDecimal(item.value);
                             }
                         }
 
-                        deliveryYesterday = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume.Yesterday.delivery_display_text);
-                        deliveryAverageWeek = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume._1WeekAvg.delivery_display_text);
-                        deliveryAverageMonth = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume._1MonthAvg.delivery_display_text);
+                        if (myDeserializedClass.data.ema != null)
+                        {
+                            foreach (var item in myDeserializedClass.data.ema)
+                            {
+                                if (Convert.ToInt32(item.key) == 5)
+                                    ema5 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 10)
+                                    ema10 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 50)
+                                    ema50 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 100)
+                                    ema100 = Convert.ToDecimal(item.value);
+                                if (Convert.ToInt32(item.key) == 200)
+                                    ema200 = Convert.ToDecimal(item.value);
+                            }
+                        }
 
-                        deliveryYesterday = deliveryYesterday != "" ? Regex.Replace(deliveryYesterday, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
-                        deliveryAverageWeek = deliveryAverageWeek != "" ? Regex.Replace(deliveryAverageWeek, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
-                        deliveryAverageMonth = deliveryAverageMonth != "" ? Regex.Replace(deliveryAverageMonth, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
+                        if (myDeserializedClass.data.pivotLevels != null)
+                        {
+                            foreach (var item in myDeserializedClass.data.pivotLevels)
+                            {
+                                if (Convert.ToString(item.key).ToLower() == "classic")
+                                {
+                                    r1 = Convert.ToDecimal(item.pivotLevel.r1);
+                                    r2 = Convert.ToDecimal(item.pivotLevel.r2);
+                                    r3 = Convert.ToDecimal(item.pivotLevel.r3);
+                                    s1 = Convert.ToDecimal(item.pivotLevel.s1);
+                                    s2 = Convert.ToDecimal(item.pivotLevel.s2);
+                                    s3 = Convert.ToDecimal(item.pivotLevel.s3);
+                                }
+                            }
+                        }
+                        
+                        if(VolDeserializedClass != null)
+                        {
+                            deliveryYesterday = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume.Yesterday.delivery_display_text);
+                            deliveryAverageWeek = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume._1WeekAvg.delivery_display_text);
+                            deliveryAverageMonth = Convert.ToString(VolDeserializedClass.data.stock_price_volume_data.volume._1MonthAvg.delivery_display_text);
+
+                            deliveryYesterday = deliveryYesterday != "" ? Regex.Replace(deliveryYesterday, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
+                            deliveryAverageWeek = deliveryAverageWeek != "" ? Regex.Replace(deliveryAverageWeek, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
+                            deliveryAverageMonth = deliveryAverageMonth != "" ? Regex.Replace(deliveryAverageMonth, @"(.*?\()(.*?)(\))", @"$2", RegexOptions.IgnoreCase) : null;
+                        }
+                        
 
                         var sqlParameters = new
                         {
@@ -255,72 +268,5 @@ namespace C9ISM.Scheduler.Helpers
                 successCount, failureCount));
         }
 
-        public async Task UpdateTickerTapdetail()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Update screener url column processing ...");
-            DatabaseHandler<Company> dbHandlerObj = new DatabaseHandler<Company>();
-            int successCount = 0;
-            int failureCount = 0;
-
-            List<Company> lstCompany = await dbHandlerObj.GetData(CommandType.StoredProcedure, null, "sp_GetAllCompany");
-            foreach (var company in lstCompany)
-            {
-                try
-                {
-                    string ScreenerApi = CommonConstant.TickertapeURL?.Replace("cname", company.Name.Replace("&", "%26"));
-
-                    using (var httpClient = new HttpClient())
-                    {
-                        var response = await httpClient.GetAsync(ScreenerApi);
-                        string apiresponse = await response.Content.ReadAsStringAsync();
-
-                        Tickertape myDeserializedClass = JsonConvert.DeserializeObject<Tickertape>(apiresponse);
-                        if(myDeserializedClass.success && myDeserializedClass.data.total > 0)
-                        {
-                            bool isMatched = false;
-                            foreach(var stock in myDeserializedClass.data.stocks)
-                            {
-                                if(Convert.ToString(stock.match)?.ToLower() == "exact")
-                                {
-                                    isMatched = true;
-                                    var sqlParameters = new
-                                    {
-                                        TPSid = stock.sid,
-                                        TPurl = stock.slug,
-                                        TPName  = stock.name,
-                                        company.Code,
-                                        company.ID
-                                    };
-                                    await dbHandlerObj.SaveData(CommandType.StoredProcedure, sqlParameters, "sp_updateTickerTapedetail");
-                                    Console.ForegroundColor = ConsoleColor.Blue;
-                                    Console.WriteLine("Stock Tikertape detail has been updated : {0}", company.Name);
-                                    successCount++;
-                                    break;
-                                }
-                            }
-                            if (!isMatched)
-                            {
-                                var sqlParameters = new
-                                {
-                                    companyID = company.ID
-                                };
-                                await dbHandlerObj.SaveData(CommandType.StoredProcedure, sqlParameters, "sp_UpdateCompanyNotFoundTP");
-                                Console.ForegroundColor = ConsoleColor.Blue;
-                                Console.WriteLine("CompanyStockTP not found for : {0}", company.Name);
-                            }
-                        }
-
-                    }
-                }
-                catch(Exception ex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Not able to update Tickertape detail to database : {0}", company.Name);
-                    new C9BasicLogger().LogWrite(string.Format("Error : Not able to update Tickertape detail to database : {0} {1}", company.Name,ex.StackTrace));
-                    failureCount++;
-                }
-            }
-        }
     }
 }

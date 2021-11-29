@@ -23,11 +23,11 @@ namespace MultiTaskingWinService
                 .ConfigureServices((hostContext, services) =>
                 {
                    services.Configure<MailSettings>(Configuration().GetSection("MailSettings"));
-                    //services.AddHostedService<DealJobService>();
+                    services.AddHostedService<DealJobService>();
                     services.AddHostedService<UpdateOtherParametersJob>();
                     services.AddHostedService<UpdateScreenUrlJob>();
                      services.AddHostedService<StockHistoricalDataJob>();
-                    // services.AddHostedService<EmailService>();
+                     services.AddHostedService<EmailService>();
                      services.AddHostedService<TickerTapJob>();
                     services.AddHostedService<CryptoService>();
                 });
