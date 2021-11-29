@@ -57,7 +57,7 @@ namespace MultiTaskingWinService.Services
                         var parameters = new { data = dt };
                         await dbHandlerObj.SaveData(CommandType.StoredProcedure, parameters, "sp_tblCrypto_insert");
                         Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine("Cypto data have been inserted successfully!!");
+                        Console.WriteLine("Crypto data have been inserted successfully!!");
                     }
                     catch (Exception ex)
                     {

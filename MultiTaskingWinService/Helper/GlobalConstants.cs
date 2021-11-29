@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MultiTaskingWinService.Helper
+﻿namespace MultiTaskingWinService.Helper
 {
     public enum ServiceInterval
     {
