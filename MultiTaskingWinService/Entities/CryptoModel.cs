@@ -29,7 +29,7 @@ public class CryptoDto
     public DateTime atl_date { get; set; }
     public Roi roi { get; set; }
     public DateTime last_updated { get; set; }
-    public float price_change_percentage_1h_in_currency { get; set; }
+    public float? price_change_percentage_1h_in_currency { get; set; }
 }
 
 public class Roi

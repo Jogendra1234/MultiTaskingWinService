@@ -26,9 +26,9 @@ namespace MultiTaskingWinService
                     services.AddHostedService<DealJobService>();
                     services.AddHostedService<UpdateOtherParametersJob>();
                     services.AddHostedService<UpdateScreenUrlJob>();
-                     services.AddHostedService<StockHistoricalDataJob>();
-                     services.AddHostedService<EmailService>();
-                     services.AddHostedService<TickerTapJob>();
+                    services.AddHostedService<StockHistoricalDataJob>();
+                    services.AddHostedService<EmailService>();
+                    services.AddHostedService<TickerTapJob>();
                     services.AddHostedService<CryptoService>();
                 });
 
